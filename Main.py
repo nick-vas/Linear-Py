@@ -23,11 +23,28 @@ class Vector(object):
 		#Compares amount of change
         return self.coordinates == v.coordinates
 
+    #Add 2 vectors and return their sum
+    def __add__(self,v):
+        return [x+y for x,y in zip(self.coordinates, v.coordinates)]
+
+    #Substract 2 vectors and return the result
+    def __sub__(self,v):
+        return [x-y for x,y in zip(self.coordinates, v.coordinates)]
+
+    #Multiply a vector by a Scalar and return the result
+    def __scale__(self,scalar):
+        return [scalar*x for x in self.coordinates]
+
 #Tests
 my_vector = Vector([1,2,3])
 print (my_vector)
 my_vector2 = Vector([1,2,3])
 my_vector3 = Vector([-1,2,3])
-
+#Equality tests
 print (my_vector == my_vector2)
 print (my_vector == my_vector3)
+
+#Sum, Sub and Scalar tests
+print (my_vector.__add__(my_vector))
+print (my_vector.__sub__(my_vector))
+print (my_vector.__scale__(2))
