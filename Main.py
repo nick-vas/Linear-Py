@@ -1,3 +1,5 @@
+from math import sqrt
+
 class Vector(object):
 	#Creates a vector based on input of coordinates
     def __init__(self, coordinates):
@@ -35,6 +37,19 @@ class Vector(object):
     def __scale__(self,scalar):
         return [scalar*x for x in self.coordinates]
 
+    #Calculate the magnitude of a given vector
+    def __mag__(self):
+        return sqrt(sum([x**2 for x in self.coordinates]))
+
+    #Calculate the direction of given vector
+    def __dir__(self):
+        try:
+            magnitude = self.__mag__()
+            return self.__scale__(1./magnitude)
+        except ZeroDivisionError:
+            raise Exception('Zero vector has no direction (can\'t normalize')
+    
+
 #Tests
 my_vector = Vector([1,2,3])
 print (my_vector)
@@ -48,3 +63,7 @@ print (my_vector == my_vector3)
 print (my_vector.__add__(my_vector))
 print (my_vector.__sub__(my_vector))
 print (my_vector.__scale__(2))
+
+#Magnitude and direction tests
+print (my_vector.__mag__())
+print (my_vector.__dir__())
